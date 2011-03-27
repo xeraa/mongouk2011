@@ -10,6 +10,7 @@ import com.google.code.morphia.annotations.Transient;
 
 /**
  * A concrete EmployeeEntity, showing the difference between object and primitive attributes.
+ * Using @Transient.
  */
 public class ManagerEntity extends EmployeeEntity {
 

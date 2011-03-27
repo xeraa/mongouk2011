@@ -15,7 +15,7 @@ import com.google.code.morphia.annotations.Transient;
 
 /**
  * The (base) EmployeeEntity, so we don't have to duplicate code for full blown entities.
- * It's using @Indexed, @Indexed(unique=true), @Reference, and @Embedded.
+ * It's using @Indexed, @Indexed(unique=true), @Reference, @Transient, and @Embedded.
  * Additionally making use of @PrePersist and @PostLoad.
  */
 @Entity(value="employee", noClassnameStored=true)
