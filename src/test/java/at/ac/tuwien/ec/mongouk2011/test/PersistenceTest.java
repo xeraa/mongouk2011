@@ -2,6 +2,7 @@ package at.ac.tuwien.ec.mongouk2011.test;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 import java.util.ConcurrentModificationException;
 
 import org.bson.types.ObjectId;
@@ -104,9 +105,9 @@ public class PersistenceTest {
 	 */
 	@Test
 	public void findByEmail(){
-		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null, "pk@test.com", 0d, 1);
+		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null, "pk@test.com", null, 1);
 		persistence.persistWorkerEntity(worker1);
-		WorkerEntity worker2 = new WorkerEntity("Jane", "Doe", null, null, null, "jane@test.com", 0d, 1);
+		WorkerEntity worker2 = new WorkerEntity("Jane", "Doe", null, null, null, "jane@test.com", null, 1);
 		persistence.persistWorkerEntity(worker2);
 		assertNull("Null parameter shouldn't find anything", persistence.findByEmail(null));
 		assertNull("Empty parameter shouldn't find anything", persistence.findByEmail(""));
@@ -141,21 +142,27 @@ public class PersistenceTest {
 	 */
 	@Test
 	public void findBySalary(){
-		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null, "pk@test.com", 2500d, 1);
+		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null, "pk@test.com", new BigDecimal("2500"), 1);
 		persistence.persistWorkerEntity(worker1);
-		WorkerEntity worker2 = new WorkerEntity("Jane", "Doe", null, null, null, "jane@test.com", 2800d, 2);
+		WorkerEntity worker2 = new WorkerEntity("Jane", "Doe", null, null, null, "jane@test.com", new BigDecimal("2800.50"), 2);
 		persistence.persistWorkerEntity(worker2);
-		assertEquals("Invalid boundaries should return an empty List", 0,
-				persistence.findBySalary(-1d, 100d).size());
+		assertEquals("Invalid lower boundary should return an empty list", 0,
+				persistence.findBySalary(new BigDecimal("-1"), new BigDecimal("100")).size());
+		assertEquals("Mixed up boundaries should return an empty list", 0, 
+				persistence.findBySalary(new BigDecimal("500"), new BigDecimal("100")).size());
+		assertEquals("Range outside the available values", 0,
+				persistence.findBySalary(new BigDecimal("100"), new BigDecimal("2499.99")).size());
 		assertEquals("No lower boundary and right inside the upper one", 1,
-				persistence.findBySalary(null, 2500d).size());
+				persistence.findBySalary(null, new BigDecimal("2500")).size());
 		assertEquals("No upper boundary and right outside the lower one", 1,
-				persistence.findBySalary(2500.1, null).size());
+				persistence.findBySalary(new BigDecimal("2500.1"), null).size());
 		assertEquals("No boundaries at all should find every entry", 2,
 				persistence.findBySalary(null, null).size());
-		assertEquals("Boundaries with both entries inside", 2, persistence.findBySalary(2000d, 3000d).size());
-		assertEquals("Testing againg the fluent interface", persistence.findBySalary(-1d, 2600d),
-				persistence.findBySalary(-1d, 2600d));
+		assertEquals("Boundaries with both entries inside", 2,
+				persistence.findBySalary(new BigDecimal("2000"), new BigDecimal("3000")).size());
+		assertEquals("Testing againg the fluent interface",
+				persistence.findBySalary(new BigDecimal("-1"), new BigDecimal("2600")),
+				persistence.findBySalaryFluent(new BigDecimal("-1"), new BigDecimal("2600")));
 	}
 	
 	/**
@@ -163,9 +170,12 @@ public class PersistenceTest {
 	 */
 	@Test
 	public void findCompanyEmployees(){
-		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null, "pk@test.com", 2500d, 1);
-		WorkerEntity worker2 = new WorkerEntity("Jane", "Doe", null, null, null, "jane@test.com", 2800d, 2);
-		ManagerEntity manager = new ManagerEntity("Mr", "Big", null, null, null, "big@test.com", 5000d, 100000d);
+		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null, "pk@test.com",
+				new BigDecimal("2500"), 1);
+		WorkerEntity worker2 = new WorkerEntity("Jane", "Doe", null, null, null, "jane@test.com",
+				new BigDecimal("2800"), 2);
+		ManagerEntity manager = new ManagerEntity("Mr", "Big", null, null, null, "big@test.com",
+				new BigDecimal("5000"),	new BigDecimal("100000"));
 		CompanyEntity company = new CompanyEntity("The company", null, null, null, null, null);
 		persistence.workingFor(worker1, company);
 		persistence.persistWorkerEntity(worker2);
@@ -184,11 +194,11 @@ public class PersistenceTest {
 	 */
 	@Test
 	public void uniqueness(){
-		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null, "pk@test.com", 0d, 1);
+		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null, "pk@test.com", null, 1);
 		persistence.persistWorkerEntity(worker1);
 		boolean duplicate = false;
 		try {
-			WorkerEntity worker2 = new WorkerEntity("Paul", "Kaufmann", null, null, null, "pk@test.com", 0d, 1);
+			WorkerEntity worker2 = new WorkerEntity("Paul", "Kaufmann", null, null, null, "pk@test.com", null, 1);
 			persistence.persistWorkerEntity(worker2);
 		} catch(DuplicateKey e){
 			duplicate = true;
@@ -203,7 +213,7 @@ public class PersistenceTest {
 	 */
 	@Test
 	public void concurrency(){
-		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null, "pk@test.com", 0d, 1);
+		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null, "pk@test.com", null, 1);
 		persistence.persistWorkerEntity(worker1);
 		WorkerEntity worker2 = persistence.getAllWorkers().get(0);
 		worker1.setFirstname("Paul");

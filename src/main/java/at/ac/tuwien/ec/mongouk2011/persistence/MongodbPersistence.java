@@ -1,5 +1,6 @@
 package at.ac.tuwien.ec.mongouk2011.persistence;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -86,30 +87,44 @@ public class MongodbPersistence implements Persistence {
 	}
 	
 	@Override
-	public List<EmployeeEntity> findBySalary(final Double minimum, final Double maximum){
-		if((minimum != null) && minimum < 0){
+	public List<EmployeeEntity> findBySalary(final BigDecimal minimum, final BigDecimal maximum){
+		
+		/**
+		 * Check that the minimum is not negative and that the maximum is not smaller than the minimum.
+		 */
+		if(
+				((minimum != null) && (minimum.compareTo(BigDecimal.ZERO) < 0)) ||
+				((minimum != null) && (maximum != null) && (maximum.compareTo(minimum) < 0))
+		){
 			return new ArrayList<EmployeeEntity>();
 		}
 		Query<EmployeeEntity> query = mongoDatastore.find(EmployeeEntity.class);
 		if(minimum != null){
-			query.filter("salary >=", minimum);
+			BigDecimal minimumScale = minimum.setScale(2, BigDecimal.ROUND_HALF_UP);
+			query.filter("salaryString >=", minimumScale.toPlainString());
 		}
 		if(maximum != null){
-			query.filter("salary <=", maximum);
+			BigDecimal maximumScale = maximum.setScale(2, BigDecimal.ROUND_HALF_UP);
+			query.filter("salaryString <=", maximumScale.toPlainString());
 		}
 		return query.asList();
 	}
 	@Override
-	public List<EmployeeEntity> findBySalaryFluent(final Double minimum, final Double maximum){
-		if(minimum < 0){
+	public List<EmployeeEntity> findBySalaryFluent(final BigDecimal minimum, final BigDecimal maximum){
+		if(
+				((minimum != null) && (minimum.compareTo(BigDecimal.ZERO) < 0)) ||
+				((minimum != null) && (maximum != null) && (maximum.compareTo(minimum) < 0))
+		){
 			return new ArrayList<EmployeeEntity>();
 		}
 		Query<EmployeeEntity> query = mongoDatastore.find(EmployeeEntity.class);
 		if(minimum != null){
-			query.field("salary").greaterThanOrEq(minimum);
+			BigDecimal minimumScale = minimum.setScale(2, BigDecimal.ROUND_HALF_UP);
+			query.field("salary").greaterThanOrEq(minimumScale.toPlainString());
 		}
 		if(maximum != null){
-			query.field("salary").lessThanOrEq(maximum);
+			BigDecimal maximumScale = maximum.setScale(2, BigDecimal.ROUND_HALF_UP);
+			query.field("salary").lessThanOrEq(maximumScale.toPlainString());
 		}
 		return query.asList();
 	}

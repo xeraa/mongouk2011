@@ -1,5 +1,6 @@
 package at.ac.tuwien.ec.mongouk2011.persistence;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -35,9 +36,9 @@ public interface Persistence {
 	
 	List<CompanyEntity> findCompanyByCountry(String country);
 
-	List<EmployeeEntity> findBySalary(Double minimum, Double maximum);
+	List<EmployeeEntity> findBySalary(BigDecimal minimum, BigDecimal maximum);
 
-	List<EmployeeEntity> findBySalaryFluent(Double minimum, Double maximum);
+	List<EmployeeEntity> findBySalaryFluent(BigDecimal minimum, BigDecimal maximum);
 
 	List<EmployeeEntity> findCompanyEmployees(String companyName);
 

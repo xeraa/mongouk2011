@@ -1,17 +1,22 @@
 package at.ac.tuwien.ec.mongouk2011.entities;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Indexed;
+import com.google.code.morphia.annotations.PostLoad;
+import com.google.code.morphia.annotations.PrePersist;
 import com.google.code.morphia.annotations.Reference;
+import com.google.code.morphia.annotations.Transient;
 
 
 /**
  * The (base) EmployeeEntity, so we don't have to duplicate code for full blown entities.
  * It's using @Indexed, @Indexed(unique=true), @Reference, and @Embedded.
+ * Additionally making use of @PrePersist and @PostLoad.
  */
 @Entity(value="employee", noClassnameStored=true)
 public class EmployeeEntity extends BaseEntity {
@@ -27,7 +32,15 @@ public class EmployeeEntity extends BaseEntity {
 	private List<String> telephone = new ArrayList<String>();
 	private List<String> fax = new ArrayList<String>();
 	private List<String> mobile = new ArrayList<String>();
-	private Double salary;
+	
+	/**
+	 * You shouldn't use Double for money values, but BigDecimal instead.
+	 * However, MongoDB doesn't natively support that (yet), so we'll use Strings in MongoDB.
+	 * Be careful with the conversions, both here and in the persistence.
+	 */
+	@Transient
+	private BigDecimal salary;
+	private String salaryString;
 	
 	@Reference
 	private CompanyEntity company;
@@ -41,7 +54,7 @@ public class EmployeeEntity extends BaseEntity {
 		super();
 	}
 	public EmployeeEntity(String firstname, String surname, List<String> telephone,
-			List<String> fax, List<String> mobile, String email, Double salary) {
+			List<String> fax, List<String> mobile, String email, BigDecimal salary) {
 		super();
 		this.firstname = firstname;
 		this.surname = surname;
@@ -88,10 +101,10 @@ public class EmployeeEntity extends BaseEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public void setSalary(Double salary) {
+	public void setSalary(BigDecimal salary) {
 		this.salary = salary;
 	}
-	public Double getSalary() {
+	public BigDecimal getSalary() {
 		return salary;
 	}
 
@@ -113,6 +126,21 @@ public class EmployeeEntity extends BaseEntity {
 	}
 	public void setAddress(AddressEntity address) {
 		this.address = address;
+	}
+	
+	@PrePersist
+	public void prePersist(){
+		if(salary != null){
+			this.salary = this.salary.setScale(2, BigDecimal.ROUND_HALF_UP);
+			salaryString = this.salary.toString();
+		}
+	}
+	@PostLoad
+	public void postLoad(){
+		if(salary != null){
+			this.salary = this.salary.setScale(2, BigDecimal.ROUND_HALF_UP);
+			this.salary = new BigDecimal(salaryString);
+		}
 	}
 	
 	@Override
