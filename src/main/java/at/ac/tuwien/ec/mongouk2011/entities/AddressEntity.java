@@ -9,7 +9,6 @@ import com.google.code.morphia.annotations.Embedded;
  */
 @Embedded
 public class AddressEntity {
-	private static final long serialVersionUID = -2984861574365342612L;
 	
 	public static enum AddressType {
 		HOME,

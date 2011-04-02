@@ -20,7 +20,6 @@ import com.google.code.morphia.annotations.Transient;
  */
 @Entity(value="employee", noClassnameStored=true)
 public class EmployeeEntity extends BaseEntity {
-	private static final long serialVersionUID = 1283376065282655142L;
 	
 	@Indexed
 	private String firstname;

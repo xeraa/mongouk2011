@@ -9,7 +9,6 @@ import com.google.code.morphia.annotations.Embedded;
  */
 @Embedded
 public class BankConnectionEntity {
-	private static final long serialVersionUID = -2861574317981065612L;
 
 	private String accountNumber;
 	private String bankCode;

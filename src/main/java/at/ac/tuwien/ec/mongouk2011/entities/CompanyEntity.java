@@ -14,7 +14,6 @@ import com.google.code.morphia.annotations.Reference;
  */
 @Entity(value="company", noClassnameStored=true)
 public class CompanyEntity extends BaseEntity {
-	private static final long serialVersionUID = 8273128360682605177L;
 	
 	@Indexed(unique=true)
 	private String name;	
