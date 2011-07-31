@@ -26,5 +26,30 @@ public class WorkerEntity extends EmployeeEntity {
 	public Integer getYearsExperience() {
 		return yearsExperience;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((yearsExperience == null) ? 0 : yearsExperience.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		WorkerEntity other = (WorkerEntity) obj;
+		if (yearsExperience == null) {
+			if (other.yearsExperience != null)
+				return false;
+		} else if (!yearsExperience.equals(other.yearsExperience))
+			return false;
+		return true;
+	}
 	
 }

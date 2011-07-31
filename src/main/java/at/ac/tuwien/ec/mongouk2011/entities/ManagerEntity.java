@@ -69,5 +69,44 @@ public class ManagerEntity extends EmployeeEntity {
 			this.bonus = new BigDecimal(bonusString);
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((approveFunds == null) ? 0 : approveFunds.hashCode());
+		result = prime * result + (approveHires ? 1231 : 1237);
+		result = prime * result + ((bonus == null) ? 0 : bonus.hashCode());
+		result = prime * result + ((bonusString == null) ? 0 : bonusString.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ManagerEntity other = (ManagerEntity) obj;
+		if (approveFunds == null) {
+			if (other.approveFunds != null)
+				return false;
+		} else if (!approveFunds.equals(other.approveFunds))
+			return false;
+		if (approveHires != other.approveHires)
+			return false;
+		if (bonus == null) {
+			if (other.bonus != null)
+				return false;
+		} else if (!bonus.equals(other.bonus))
+			return false;
+		if (bonusString == null) {
+			if (other.bonusString != null)
+				return false;
+		} else if (!bonusString.equals(other.bonusString))
+			return false;
+		return true;
+	}
 	
 }

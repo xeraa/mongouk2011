@@ -57,7 +57,6 @@ public class PersistenceTest {
 				"foobar@test.com");
 		ObjectId id = persistence.persistCompanyEntity(company);
 		assertNotNull("An ObjectId should have been generated when saving the entity", id);
-		assertTrue("The id must be a valid ObjectId", id instanceof ObjectId);
 		assertEquals("The return value and actual value of the ObjectId should match", company.getId(), id);
 	}
 	
