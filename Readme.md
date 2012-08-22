@@ -11,9 +11,9 @@ The presentation is also available at: [https://prezi.com/ykqpljl6-wem/mongouk20
 
 
 ## Requirements
-*   JDK (tested with JDK6)
-*   Maven (tested with Maven2)
-*   MongoDB (tested with MongoDB 1.8)
+*   JDK6+ (tested with JDK6)
+*   Maven (tested with Maven2 and Maven3)
+*   MongoDB (tested with MongoDB 1.8 and 2.0)
 
 An IDE like Eclipse is highly recommended but not required.
 
