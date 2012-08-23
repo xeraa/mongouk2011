@@ -2,10 +2,9 @@ package at.ac.tuwien.ec.mongouk2011.entities;
 
 import com.google.code.morphia.annotations.Embedded;
 
-
 /**
- * An embedded BankConnectionEntity, which should not use @Id.
- * Also creationDate and lastChange are not required, as they are already in the container entity.
+ * An embedded BankConnectionEntity, which should not use @Id. Also creationDate
+ * and lastChange are not required, as they are already in the container entity.
  */
 @Embedded
 public class BankConnectionEntity {
@@ -16,11 +15,12 @@ public class BankConnectionEntity {
 	private String iban;
 	private String country;
 
-
-	public BankConnectionEntity(){
+	public BankConnectionEntity() {
 		super();
 	}
-	public BankConnectionEntity(String name, String accountNumber, String bankCode, String bic, String iban, String country) {
+
+	public BankConnectionEntity(String name, String accountNumber, String bankCode, String bic,
+			String iban, String country) {
 		super();
 		this.accountNumber = accountNumber;
 		this.bankCode = bankCode;
@@ -32,30 +32,39 @@ public class BankConnectionEntity {
 	public String getAccountNumber() {
 		return accountNumber;
 	}
+
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
+
 	public String getBankCode() {
 		return bankCode;
 	}
+
 	public void setBankCode(String bankCode) {
 		this.bankCode = bankCode;
 	}
+
 	public String getBic() {
 		return bic;
 	}
+
 	public void setBic(String bic) {
 		this.bic = bic;
 	}
+
 	public String getIban() {
 		return iban;
 	}
+
 	public void setIban(String iban) {
 		this.iban = iban;
 	}
+
 	public String getCountry() {
 		return country;
 	}
+
 	public void setCountry(String country) {
 		this.country = country;
 	}
@@ -90,11 +99,11 @@ public class BankConnectionEntity {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "BankConnectionEntity [accountNumber=" + accountNumber + ", bankCode=" + bankCode
 				+ ", bic=" + bic + ", iban=" + iban + ", country=" + country + "]";
 	}
-	
+
 }

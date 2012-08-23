@@ -10,9 +10,9 @@ import at.ac.tuwien.ec.mongouk2011.entities.EmployeeEntity;
 import at.ac.tuwien.ec.mongouk2011.entities.ManagerEntity;
 import at.ac.tuwien.ec.mongouk2011.entities.WorkerEntity;
 
-
 /**
- * The general Persistence interface - in our specific case this will be implemented by MongodbPersistence.
+ * The general Persistence interface - in our specific case this will be
+ * implemented by MongodbPersistence.
  */
 public interface Persistence {
 
@@ -23,7 +23,7 @@ public interface Persistence {
 	ObjectId persistManagerEntity(ManagerEntity manager);
 
 	void clearData();
-	
+
 	List<CompanyEntity> getAllCompanies();
 
 	List<EmployeeEntity> getAllEmployees();
@@ -33,7 +33,7 @@ public interface Persistence {
 	List<WorkerEntity> getAllWorkers();
 
 	EmployeeEntity findByEmail(String email);
-	
+
 	List<CompanyEntity> findCompanyByCountry(String country);
 
 	List<EmployeeEntity> findBySalary(BigDecimal minimum, BigDecimal maximum);
