@@ -2,71 +2,77 @@ package at.ac.tuwien.ec.mongouk2011.entities;
 
 import com.google.code.morphia.annotations.Embedded;
 
-
 /**
- * An embedded AddressEntity, which should not use @Id.
- * Also creationDate and lastChange are not required, as they are already in the container entity.
+ * An embedded AddressEntity, which should not use @Id. Also creationDate and
+ * lastChange are not required, as they are already in the container entity.
  */
 @Embedded
 public class AddressEntity {
-	
+
 	public static enum AddressType {
-		HOME,
-		WORK,
-		HOMEANDWORK,
+		HOME, WORK, HOMEANDWORK,
 	}
-	
+
 	private String street;
 	private String zip;
 	private String city;
 	private String country;
-	private AddressType addresType;
-	
-	
-	
+	private AddressType addressType;
+
 	public AddressEntity() {
 		super();
 	}
-	public AddressEntity(String street, String zip, String city, String country, AddressType addresType) {
+
+	public AddressEntity(String street, String zip, String city, String country,
+			AddressType addressType) {
 		super();
 		this.street = street;
 		this.zip = zip;
 		this.city = city;
 		this.country = country;
-		this.addresType = addresType;
+		this.addressType = addressType;
 	}
-	
+
 	public String getStreet() {
 		return street;
 	}
+
 	public void setStreet(String street) {
 		this.street = street;
 	}
+
 	public String getZip() {
 		return zip;
 	}
+
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
+
 	public String getCity() {
 		return city;
 	}
+
 	public void setCity(String city) {
 		this.city = city;
 	}
+
 	public String getCountry() {
 		return country;
 	}
+
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public AddressType getAddresType() {
-		return addresType;
+
+	public AddressType getAddressType() {
+		return addressType;
 	}
-	public void setAddresType(AddressType addresType) {
-		this.addresType = addresType;
+
+	public void setAddressType(AddressType addressType) {
+		this.addressType = addressType;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,7 +83,7 @@ public class AddressEntity {
 		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -109,11 +115,11 @@ public class AddressEntity {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "AddressEntity [street=" + street + ", zip=" + zip + ", city=" + city + ", country="
-				+ country + ", addresType=" + addresType + "]";
+				+ country + ", addressType=" + addressType + "]";
 	}
-	
+
 }
