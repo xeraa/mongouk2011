@@ -147,17 +147,19 @@ public class EmployeeEntity extends BaseEntity {
 
 	@PrePersist
 	public void prePersist() {
+		super.prePersist();
 		if (salary != null) {
 			this.salary = this.salary.setScale(2, BigDecimal.ROUND_HALF_UP);
-			salaryString = this.salary.toString();
+			this.salaryString = this.salary.toString();
 		}
 	}
 
 	@PostLoad
 	public void postLoad() {
-		if (salary != null) {
-			this.salary = this.salary.setScale(2, BigDecimal.ROUND_HALF_UP);
+		if (salaryString != null) {
 			this.salary = new BigDecimal(salaryString);
+		} else {
+			this.salary = null;
 		}
 	}
 

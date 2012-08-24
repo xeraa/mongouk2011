@@ -3,6 +3,7 @@ package at.ac.tuwien.ec.mongouk2011.test;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.ConcurrentModificationException;
 
 import org.bson.types.ObjectId;
@@ -16,6 +17,7 @@ import at.ac.tuwien.ec.mongouk2011.entities.AddressEntity;
 import at.ac.tuwien.ec.mongouk2011.entities.AddressEntity.AddressType;
 import at.ac.tuwien.ec.mongouk2011.entities.BankConnectionEntity;
 import at.ac.tuwien.ec.mongouk2011.entities.CompanyEntity;
+import at.ac.tuwien.ec.mongouk2011.entities.EmployeeEntity;
 import at.ac.tuwien.ec.mongouk2011.entities.ManagerEntity;
 import at.ac.tuwien.ec.mongouk2011.entities.WorkerEntity;
 import at.ac.tuwien.ec.mongouk2011.persistence.MongodbPersistence;
@@ -59,6 +61,18 @@ public class PersistenceTest {
 		assertNotNull("An ObjectId should have been generated when saving the entity", id);
 		assertEquals("The return value and actual value of the ObjectId should match",
 				company.getId(), id);
+	}
+	
+	/**
+	 * Check salary conversion.
+	 */
+	@Test
+	public void persistEmployeeEntity() {
+		WorkerEntity entity = new WorkerEntity("Steve", "Jobs", Collections.<String> emptyList(), Collections.<String> emptyList(), Collections.<String> emptyList(), "steve@apple.com", new BigDecimal("5.25"), 5);
+		persistence.persistWorkerEntity(entity);
+		
+		EmployeeEntity result = persistence.findByEmail("steve@apple.com");
+		assertEquals(new BigDecimal("5.25"), result.getSalary());
 	}
 
 	/**
