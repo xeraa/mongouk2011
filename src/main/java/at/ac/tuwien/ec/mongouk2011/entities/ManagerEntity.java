@@ -62,17 +62,20 @@ public class ManagerEntity extends EmployeeEntity {
 
 	@PrePersist
 	public void prePersist() {
+		super.prePersist();
 		if (bonus != null) {
-			this.bonus = this.bonus.setScale(2, BigDecimal.ROUND_HALF_UP);
-			bonusString = this.bonus.toString();
+			this.bonus.setScale(2, BigDecimal.ROUND_HALF_UP);
+			this.bonusString = bonus.toString();
 		}
 	}
 
 	@PostLoad
 	public void postLoad() {
-		if (bonus != null) {
-			this.bonus = this.bonus.setScale(2, BigDecimal.ROUND_HALF_UP);
+		super.postLoad();
+		if (bonusString != null) {
 			this.bonus = new BigDecimal(bonusString);
+		} else {
+			this.bonus = null;
 		}
 	}
 
