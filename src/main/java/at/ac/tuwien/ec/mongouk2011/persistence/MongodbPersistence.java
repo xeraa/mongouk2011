@@ -83,7 +83,7 @@ public class MongodbPersistence implements Persistence {
 	}
 
 	@Override
-	public List<CompanyEntity> findCompanyByCountry(String country) {
+	public List<CompanyEntity> findCompanyByCountry(final String country) {
 		if ((country == null) || country.isEmpty()) {
 			return new ArrayList<CompanyEntity>();
 		}
