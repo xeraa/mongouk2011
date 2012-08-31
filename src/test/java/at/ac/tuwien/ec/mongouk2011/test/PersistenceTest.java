@@ -1,17 +1,18 @@
 package at.ac.tuwien.ec.mongouk2011.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.ConcurrentModificationException;
 
 import org.bson.types.ObjectId;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.mongodb.MongoException.DuplicateKey;
 
 import at.ac.tuwien.ec.mongouk2011.entities.AddressEntity;
 import at.ac.tuwien.ec.mongouk2011.entities.AddressEntity.AddressType;
@@ -22,6 +23,8 @@ import at.ac.tuwien.ec.mongouk2011.entities.ManagerEntity;
 import at.ac.tuwien.ec.mongouk2011.entities.WorkerEntity;
 import at.ac.tuwien.ec.mongouk2011.persistence.MongodbPersistence;
 import at.ac.tuwien.ec.mongouk2011.persistence.Persistence;
+
+import com.mongodb.MongoException.DuplicateKey;
 
 /**
  * Testing our entities and the MongodbPersistence.
@@ -62,15 +65,16 @@ public class PersistenceTest {
 		assertEquals("The return value and actual value of the ObjectId should match",
 				company.getId(), id);
 	}
-	
+
 	/**
 	 * Check salary conversion.
 	 */
 	@Test
 	public void persistEmployeeEntity() {
-		WorkerEntity entity = new WorkerEntity("Steve", "Jobs", Collections.<String> emptyList(), Collections.<String> emptyList(), Collections.<String> emptyList(), "steve@apple.com", new BigDecimal("5.25"), 5);
+		WorkerEntity entity = new WorkerEntity("Steve", "Jobs", null, null, null,
+				"steve@apple.com", new BigDecimal("5.25"), 5);
 		persistence.persistWorkerEntity(entity);
-		
+
 		EmployeeEntity result = persistence.findByEmail("steve@apple.com");
 		assertEquals(new BigDecimal("5.25"), result.getSalary());
 	}
