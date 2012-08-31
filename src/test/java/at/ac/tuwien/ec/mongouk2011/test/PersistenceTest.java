@@ -74,7 +74,6 @@ public class PersistenceTest {
 		WorkerEntity entity = new WorkerEntity("Steve", "Jobs", null, null, null,
 				"steve@apple.com", new BigDecimal("5.25"), 5);
 		persistence.persistWorkerEntity(entity);
-
 		EmployeeEntity result = persistence.findByEmail("steve@apple.com");
 		assertEquals(new BigDecimal("5.25"), result.getSalary());
 	}
