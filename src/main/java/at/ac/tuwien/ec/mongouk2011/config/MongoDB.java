@@ -3,6 +3,7 @@ package at.ac.tuwien.ec.mongouk2011.config;
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Morphia;
 import com.mongodb.Mongo;
+import com.mongodb.WriteConcern;
 
 /**
  * MongoDB providing the database connection.
@@ -16,6 +17,7 @@ public class MongoDB {
 	private MongoDB() {
 		try {
 			Mongo mongo = new Mongo("127.0.0.1", 27017);
+			mongo.setWriteConcern(WriteConcern.SAFE);
 			datastore = new Morphia().mapPackage("at.ac.tuwien.ec.mongouk2011.entities")
 					.createDatastore(mongo, DB_NAME);
 			datastore.ensureIndexes();
