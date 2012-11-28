@@ -1,11 +1,11 @@
 package at.ac.tuwien.ec.mongouk2011.config;
 
+import at.ac.tuwien.ec.mongouk2011.entities.BaseEntity;
+
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Morphia;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 import com.mongodb.WriteConcern;
-
-import at.ac.tuwien.ec.mongouk2011.entities.BaseEntity;
 
 
 /**
@@ -19,10 +19,10 @@ public class MongoDB {
 
 	private MongoDB() {
 		try {
-			Mongo mongo = new Mongo("127.0.0.1", 27017);
-			mongo.setWriteConcern(WriteConcern.SAFE);
+			MongoClient mongoClient = new MongoClient("127.0.0.1", 27017);
+			mongoClient.setWriteConcern(WriteConcern.SAFE);
 			datastore = new Morphia().mapPackage(BaseEntity.class.getPackage().getName())
-					.createDatastore(mongo, DB_NAME);
+					.createDatastore(mongoClient, DB_NAME);
 			datastore.ensureIndexes();
 		} catch (Exception e) {
 			throw new RuntimeException("Error initializing MongoDB", e);
