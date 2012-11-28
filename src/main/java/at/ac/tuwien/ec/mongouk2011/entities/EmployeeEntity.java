@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.code.morphia.annotations.Embedded;
-import com.google.code.morphia.annotations.Entity;
-import com.google.code.morphia.annotations.Indexed;
-import com.google.code.morphia.annotations.PostLoad;
-import com.google.code.morphia.annotations.PrePersist;
-import com.google.code.morphia.annotations.Reference;
-import com.google.code.morphia.annotations.Transient;
+import com.github.jmkgreen.morphia.annotations.Embedded;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Indexed;
+import com.github.jmkgreen.morphia.annotations.PostLoad;
+import com.github.jmkgreen.morphia.annotations.PrePersist;
+import com.github.jmkgreen.morphia.annotations.Reference;
+import com.github.jmkgreen.morphia.annotations.Transient;
 
 /**
  * The (base) EmployeeEntity, so we don't have to duplicate code for full blown

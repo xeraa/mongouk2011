@@ -5,7 +5,7 @@ import org.bson.types.ObjectId;
 import at.ac.tuwien.ec.mongouk2011.config.MongoDB;
 import at.ac.tuwien.ec.mongouk2011.entities.BaseEntity;
 
-import com.google.code.morphia.Datastore;
+import com.github.jmkgreen.morphia.Datastore;
 
 /**
  * The generic Persistence implementation, showing how to do persists, various

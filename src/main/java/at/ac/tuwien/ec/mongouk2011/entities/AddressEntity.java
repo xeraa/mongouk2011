@@ -1,6 +1,6 @@
 package at.ac.tuwien.ec.mongouk2011.entities;
 
-import com.google.code.morphia.annotations.Embedded;
+import com.github.jmkgreen.morphia.annotations.Embedded;
 
 /**
  * An embedded AddressEntity, which should not use @Id. Also creationDate and

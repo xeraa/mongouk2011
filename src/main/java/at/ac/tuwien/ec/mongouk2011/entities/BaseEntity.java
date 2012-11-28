@@ -4,9 +4,9 @@ import java.util.Date;
 
 import org.bson.types.ObjectId;
 
-import com.google.code.morphia.annotations.Id;
-import com.google.code.morphia.annotations.PrePersist;
-import com.google.code.morphia.annotations.Version;
+import com.github.jmkgreen.morphia.annotations.Id;
+import com.github.jmkgreen.morphia.annotations.PrePersist;
+import com.github.jmkgreen.morphia.annotations.Version;
 
 /**
  * Provide the BaseEntity implementation for all entities:

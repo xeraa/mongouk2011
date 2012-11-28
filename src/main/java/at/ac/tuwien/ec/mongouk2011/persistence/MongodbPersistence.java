@@ -13,8 +13,8 @@ import at.ac.tuwien.ec.mongouk2011.entities.EmployeeEntity;
 import at.ac.tuwien.ec.mongouk2011.entities.ManagerEntity;
 import at.ac.tuwien.ec.mongouk2011.entities.WorkerEntity;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.query.Query;
+import com.github.jmkgreen.morphia.Datastore;
+import com.github.jmkgreen.morphia.query.Query;
 
 /**
  * The Persistence implementation, showing how to do an upsert, various queries,

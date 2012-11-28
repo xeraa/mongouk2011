@@ -2,11 +2,10 @@ package at.ac.tuwien.ec.mongouk2011.config;
 
 import at.ac.tuwien.ec.mongouk2011.entities.BaseEntity;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Morphia;
+import com.github.jmkgreen.morphia.Datastore;
+import com.github.jmkgreen.morphia.Morphia;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteConcern;
-
 
 /**
  * MongoDB providing the database connection.

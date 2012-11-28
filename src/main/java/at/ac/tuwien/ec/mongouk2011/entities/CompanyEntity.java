@@ -3,13 +3,14 @@ package at.ac.tuwien.ec.mongouk2011.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.code.morphia.annotations.Embedded;
-import com.google.code.morphia.annotations.Entity;
-import com.google.code.morphia.annotations.Indexed;
-import com.google.code.morphia.annotations.Reference;
+import com.github.jmkgreen.morphia.annotations.Embedded;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Indexed;
+import com.github.jmkgreen.morphia.annotations.Reference;
 
 /**
  * The CompanyEntity, using @Indexed(unique=true), @Reference (list), and
+ * 
  * @Embedded.
  */
 @Entity(value = "company", noClassnameStored = true)
