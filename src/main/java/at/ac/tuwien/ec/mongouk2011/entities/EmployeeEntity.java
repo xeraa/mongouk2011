@@ -17,7 +17,7 @@ import com.github.jmkgreen.morphia.annotations.Transient;
  * entities. It's using @Indexed, @Indexed(unique=true), @Reference, @Transient,
  * and @Embedded. Additionally making use of @PrePersist and @PostLoad.
  */
-@Entity(value = "employee", noClassnameStored = true)
+@Entity(value = "employee", noClassnameStored = false)
 public class EmployeeEntity extends BaseEntity {
 
 	@Indexed
