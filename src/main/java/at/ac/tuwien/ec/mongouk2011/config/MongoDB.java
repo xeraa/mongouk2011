@@ -1,5 +1,7 @@
 package at.ac.tuwien.ec.mongouk2011.config;
 
+import java.util.logging.Logger;
+
 import at.ac.tuwien.ec.mongouk2011.entities.BaseEntity;
 
 import com.github.jmkgreen.morphia.Datastore;
@@ -11,6 +13,7 @@ import com.mongodb.WriteConcern;
  * MongoDB providing the database connection.
  */
 public class MongoDB {
+	private static final Logger LOG = Logger.getLogger(MongoDB.class.getName());
 	private static final MongoDB INSTANCE = new MongoDB();
 
 	private final Datastore datastore;
@@ -23,6 +26,7 @@ public class MongoDB {
 			datastore = new Morphia().mapPackage(BaseEntity.class.getPackage().getName())
 					.createDatastore(mongoClient, DB_NAME);
 			datastore.ensureIndexes();
+			LOG.info("Connection to database '" + DB_NAME + "' initialized");
 		} catch (Exception e) {
 			throw new RuntimeException("Error initializing MongoDB", e);
 		}
