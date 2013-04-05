@@ -21,7 +21,7 @@ public class MongoDB {
 
 	private MongoDB() {
 		try {
-			MongoClient mongoClient = new MongoClient("127.0.0.1", 8082); // 27017
+			MongoClient mongoClient = new MongoClient("127.0.0.1", 27017);
 			mongoClient.setWriteConcern(WriteConcern.SAFE);
 			datastore = new Morphia().mapPackage(BaseEntity.class.getPackage().getName())
 					.createDatastore(mongoClient, DB_NAME);
