@@ -4,7 +4,7 @@
 
 	<groupId>at.ac.tuwien.ec</groupId>
 	<artifactId>mongouk2011</artifactId>
-	<version>0.5</version>
+	<version>0.6</version>
 	<packaging>jar</packaging>
 	<name>MongoUK 2011</name>
 	<url>https://github.com/xeraa/mongouk2011</url>
