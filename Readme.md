@@ -1,5 +1,7 @@
 # MongoUK2011 Morphia Presentation
 
+[![Build Status](https://travis-ci.org/xeraa/mongouk2011.png?branch=master)](https://travis-ci.org/xeraa/mongouk2011)
+
 This is a simple test project I used to show some Morphia features at MongoUK2011: [http://www.10gen.com/conferences/mongouk2011#agenda](http://www.10gen.com/conferences/mongouk2011#agenda)
 
 ## Entities
