@@ -114,7 +114,9 @@ public class EmployeeEntity extends BaseEntity {
 	}
 
 	public void setSalary(BigDecimal salary) {
-		this.salary = salary;
+		if(salary != null){
+			this.salary = salary.setScale(2, BigDecimal.ROUND_HALF_UP);
+		}
 	}
 
 	public BigDecimal getSalary() {
@@ -148,15 +150,14 @@ public class EmployeeEntity extends BaseEntity {
 	@PrePersist
 	public void prePersist() {
 		super.prePersist();
-		if (salary != null) {
-			this.salary = this.salary.setScale(2, BigDecimal.ROUND_HALF_UP);
+		if(salary != null) {
 			this.salaryString = this.salary.toString();
 		}
 	}
 
 	@PostLoad
 	public void postLoad() {
-		if (salaryString != null) {
+		if(salaryString != null) {
 			this.salary = new BigDecimal(salaryString);
 		} else {
 			this.salary = null;

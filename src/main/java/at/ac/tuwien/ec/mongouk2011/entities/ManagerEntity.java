@@ -33,7 +33,7 @@ public class ManagerEntity extends EmployeeEntity {
 	public ManagerEntity(String firstname, String surname, List<String> telephone,
 			List<String> fax, List<String> mobile, String email, BigDecimal salary, BigDecimal bonus) {
 		super(firstname, surname, telephone, fax, mobile, email, salary);
-		this.bonus = bonus;
+		this.setBonus(bonus);
 	}
 
 	public BigDecimal getBonus() {
@@ -41,7 +41,9 @@ public class ManagerEntity extends EmployeeEntity {
 	}
 
 	public void setBonus(BigDecimal bonus) {
-		this.bonus = bonus;
+		if(bonus != null){
+			this.bonus = bonus.setScale(2, BigDecimal.ROUND_HALF_UP);
+		}
 	}
 
 	public void setApproveFunds(Boolean approveFunds) {
