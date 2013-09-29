@@ -2,10 +2,7 @@ package at.ac.tuwien.ec.mongouk2011.entities;
 
 import java.math.BigDecimal;
 import java.util.List;
-
-import org.mongodb.morphia.annotations.PostLoad;
-import org.mongodb.morphia.annotations.PrePersist;
-import org.mongodb.morphia.annotations.Transient;
+import org.mongodb.morphia.annotations.Serialized;
 
 /**
  * A concrete EmployeeEntity, showing the difference between object and
@@ -18,13 +15,11 @@ public class ManagerEntity extends EmployeeEntity {
 
 	/**
 	 * You shouldn't use Double for money values, but BigDecimal instead.
-	 * However, MongoDB doesn't natively support that (yet), so we'll use
-	 * Strings in MongoDB. Be careful with the conversions, both here and in the
-	 * persistence.
+	 * However, MongoDB doesn't natively support that (yet), so we'll serialize
+	 * the value in Java - done transparently.
 	 */
-	@Transient
+	@Serialized
 	private BigDecimal bonus;
-	private String bonusString;
 
 	public ManagerEntity() {
 		super();
