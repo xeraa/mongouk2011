@@ -1,6 +1,6 @@
 package at.ac.tuwien.ec.mongouk2011.entities;
 
-import com.github.jmkgreen.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Embedded;
 
 /**
  * An embedded BankConnectionEntity, which should not use @Id. Also creationDate

@@ -3,10 +3,10 @@ package at.ac.tuwien.ec.mongouk2011.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.jmkgreen.morphia.annotations.Embedded;
-import com.github.jmkgreen.morphia.annotations.Entity;
-import com.github.jmkgreen.morphia.annotations.Indexed;
-import com.github.jmkgreen.morphia.annotations.Reference;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Indexed;
+import org.mongodb.morphia.annotations.Reference;
 
 /**
  * The CompanyEntity, using @Indexed(unique=true), @Reference (list), and

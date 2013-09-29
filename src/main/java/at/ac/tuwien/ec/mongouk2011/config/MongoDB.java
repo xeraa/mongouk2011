@@ -4,8 +4,8 @@ import java.util.logging.Logger;
 
 import at.ac.tuwien.ec.mongouk2011.entities.BaseEntity;
 
-import com.github.jmkgreen.morphia.Datastore;
-import com.github.jmkgreen.morphia.Morphia;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteConcern;
 

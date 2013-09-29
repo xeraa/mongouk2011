@@ -3,9 +3,9 @@ package at.ac.tuwien.ec.mongouk2011.entities;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.github.jmkgreen.morphia.annotations.PostLoad;
-import com.github.jmkgreen.morphia.annotations.PrePersist;
-import com.github.jmkgreen.morphia.annotations.Transient;
+import org.mongodb.morphia.annotations.PostLoad;
+import org.mongodb.morphia.annotations.PrePersist;
+import org.mongodb.morphia.annotations.Transient;
 
 /**
  * A concrete EmployeeEntity, showing the difference between object and
