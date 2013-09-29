@@ -55,7 +55,7 @@ public class EmployeeEntity extends BaseEntity {
 
 	public EmployeeEntity(String firstname, String surname, List<String> telephone,
 			List<String> fax, List<String> mobile, String email, BigDecimal salary) {
-		super();
+		this();
 		this.firstname = firstname;
 		this.surname = surname;
 		this.telephone = telephone;

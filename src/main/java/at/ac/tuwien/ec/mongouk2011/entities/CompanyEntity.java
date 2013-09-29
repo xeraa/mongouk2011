@@ -39,7 +39,7 @@ public class CompanyEntity extends BaseEntity {
 
 	public CompanyEntity(String name, List<String> telephone, List<String> fax,
 			List<String> mobile, String email, String web) {
-		super();
+		this();
 		this.name = name;
 		this.telephone = telephone;
 		this.fax = fax;

@@ -25,7 +25,7 @@ public class AddressEntity {
 
 	public AddressEntity(String street, String zip, String city, String country,
 			AddressType addressType) {
-		super();
+		this();
 		this.street = street;
 		this.zip = zip;
 		this.city = city;

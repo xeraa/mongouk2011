@@ -21,7 +21,7 @@ public class BankConnectionEntity {
 
 	public BankConnectionEntity(String name, String accountNumber, String bankCode, String bic,
 			String iban, String country) {
-		super();
+		this();
 		this.accountNumber = accountNumber;
 		this.bankCode = bankCode;
 		this.bic = bic;
