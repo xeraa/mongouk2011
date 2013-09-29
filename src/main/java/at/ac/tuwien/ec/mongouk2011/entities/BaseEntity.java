@@ -60,14 +60,6 @@ public abstract class BaseEntity {
 		this.lastChange = (lastChange == null) ? creationDate : new Date();
 	}
 
-	/**
-	 * For easier debugging and handling we'll always implement the following
-	 * three methods:
-	 */
-	public abstract int hashCode();
-
-	public abstract boolean equals(Object obj);
-
 	public abstract String toString();
 
 }
