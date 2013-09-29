@@ -11,15 +11,15 @@ The presentation is also available at: [https://prezi.com/ykqpljl6-wem/mongouk20
 
 
 ## Requirements
-*   JDK6+ (tested with JDK6 and JDK7)
-*   Maven (tested with Maven2 and Maven3)
-*   MongoDB (tested with MongoDB 1.8, 2.0, and 2.2)
+*   JDK7+
+*   Maven2+ (tested with Maven2 and Maven3)
+*   MongoDB 2.0+
 
-An IDE like Eclipse is highly recommended but not required.
+An IDE like Eclipse or IntelliJ is highly recommended but not required.
 
 
 ## Getting started
-Inside the base folder (where the pom.xml file is located) run the following commands to get started:
+Inside the base folder (where the pom.xml file is located) run the following commands to get started - this assumes that you have MongoDB running on the default port:
 
     mvn install
     mvn test
