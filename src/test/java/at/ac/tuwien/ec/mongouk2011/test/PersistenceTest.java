@@ -1,19 +1,5 @@
 package at.ac.tuwien.ec.mongouk2011.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import java.math.BigDecimal;
-import java.util.ConcurrentModificationException;
-
-import org.bson.types.ObjectId;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import at.ac.tuwien.ec.mongouk2011.entities.AddressEntity;
 import at.ac.tuwien.ec.mongouk2011.entities.AddressEntity.AddressType;
 import at.ac.tuwien.ec.mongouk2011.entities.BankConnectionEntity;
@@ -23,8 +9,19 @@ import at.ac.tuwien.ec.mongouk2011.entities.ManagerEntity;
 import at.ac.tuwien.ec.mongouk2011.entities.WorkerEntity;
 import at.ac.tuwien.ec.mongouk2011.persistence.MongodbPersistence;
 import at.ac.tuwien.ec.mongouk2011.persistence.Persistence;
-
 import com.mongodb.MongoException.DuplicateKey;
+import java.math.BigDecimal;
+import java.util.ConcurrentModificationException;
+import org.bson.types.ObjectId;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Testing our entities and the MongodbPersistence.
@@ -71,11 +68,19 @@ public class PersistenceTest {
 	 */
 	@Test
 	public void persistEmployeeEntity() {
-		WorkerEntity entity = new WorkerEntity("Steve", "Jobs", null, null, null,
-				"steve@apple.com", new BigDecimal("5.25"), 5);
-		persistence.persistWorkerEntity(entity);
-		EmployeeEntity result = persistence.findByEmail("steve@apple.com");
-		assertEquals(new BigDecimal("5.25"), result.getSalary());
+		WorkerEntity worker= new WorkerEntity("Steve", "Jobs", null, null, null,
+				"steve@apple.com", new BigDecimal("5.25"), 5, new BigDecimal("10"));
+		persistence.persistWorkerEntity(worker);
+		EmployeeEntity resultEmployee = persistence.findByEmail("steve@apple.com");
+		assertEquals(new BigDecimal("5.25"), resultEmployee.getSalary());
+		// Since there is only 1 manager this is fine, but you cannot rely on the order of inserted entities in general
+		WorkerEntity resultWorker = persistence.getAllWorkers().get(0);
+		assertEquals(new BigDecimal("10.00"), resultWorker.getDailyAllowance());
+		ManagerEntity manager = new ManagerEntity("Mr", "Big", null, null, null, "big@test.com",
+				new BigDecimal("5000"), new BigDecimal("100000"));
+		persistence.persistManagerEntity(manager);
+		ManagerEntity resultManager = persistence.getAllManagers().get(0);
+		assertEquals(new BigDecimal("100000.00"), resultManager.getBonus());
 	}
 
 	/**
@@ -125,10 +130,10 @@ public class PersistenceTest {
 	@Test
 	public void findByEmail() {
 		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null,
-				"pk@test.com", null, 1);
+				"pk@test.com", null, 1, null);
 		persistence.persistWorkerEntity(worker1);
 		WorkerEntity worker2 = new WorkerEntity("Jane", "Doe", null, null, null, "jane@test.com",
-				null, 1);
+				null, 1, null);
 		persistence.persistWorkerEntity(worker2);
 		assertNull("Null parameter shouldn't find anything", persistence.findByEmail(null));
 		assertNull("Empty parameter shouldn't find anything", persistence.findByEmail(""));
@@ -166,10 +171,10 @@ public class PersistenceTest {
 	@Test
 	public void findBySalary() {
 		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null,
-				"pk@test.com", new BigDecimal("2500"), 1);
+				"pk@test.com", new BigDecimal("2500"), 1, null);
 		persistence.persistWorkerEntity(worker1);
 		WorkerEntity worker2 = new WorkerEntity("Jane", "Doe", null, null, null, "jane@test.com",
-				new BigDecimal("2800.50"), 2);
+				new BigDecimal("2800.50"), 2, null);
 		persistence.persistWorkerEntity(worker2);
 		assertEquals("Invalid lower boundary should return an empty list", 0, persistence
 				.findBySalary(new BigDecimal("-1"), new BigDecimal("100")).size());
@@ -196,9 +201,9 @@ public class PersistenceTest {
 	@Test
 	public void findCompanyEmployees() {
 		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null,
-				"pk@test.com", new BigDecimal("2500"), 1);
+				"pk@test.com", new BigDecimal("2500"), 1, null);
 		WorkerEntity worker2 = new WorkerEntity("Jane", "Doe", null, null, null, "jane@test.com",
-				new BigDecimal("2800"), 2);
+				new BigDecimal("2800"), 2, null);
 		ManagerEntity manager = new ManagerEntity("Mr", "Big", null, null, null, "big@test.com",
 				new BigDecimal("5000"), new BigDecimal("100000"));
 		CompanyEntity company = new CompanyEntity("The company", null, null, null, null, null);
@@ -220,12 +225,12 @@ public class PersistenceTest {
 	@Test
 	public void uniqueness() {
 		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null,
-				"pk@test.com", null, 1);
+				"pk@test.com", null, 1, null);
 		persistence.persistWorkerEntity(worker1);
 		boolean duplicate = false;
 		try {
 			WorkerEntity worker2 = new WorkerEntity("Paul", "Kaufmann", null, null, null,
-					"pk@test.com", null, 1);
+					"pk@test.com", null, 1, null);
 			persistence.persistWorkerEntity(worker2);
 		} catch (DuplicateKey e) {
 			duplicate = true;
@@ -242,7 +247,7 @@ public class PersistenceTest {
 	@Test
 	public void concurrency() {
 		WorkerEntity worker1 = new WorkerEntity("Philipp", "Krenn", null, null, null,
-				"pk@test.com", null, 1);
+				"pk@test.com", null, 1, null);
 		persistence.persistWorkerEntity(worker1);
 		WorkerEntity worker2 = persistence.getAllWorkers().get(0);
 		worker1.setFirstname("Paul");

@@ -1,22 +1,20 @@
 package at.ac.tuwien.ec.mongouk2011.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
-import java.math.BigDecimal;
-
-import org.bson.types.ObjectId;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import at.ac.tuwien.ec.mongouk2011.entities.CompanyEntity;
 import at.ac.tuwien.ec.mongouk2011.entities.WorkerEntity;
 import at.ac.tuwien.ec.mongouk2011.persistence.GenericPersistence;
 import at.ac.tuwien.ec.mongouk2011.persistence.MongodbGenericPersistence;
 import at.ac.tuwien.ec.mongouk2011.persistence.MongodbPersistence;
 import at.ac.tuwien.ec.mongouk2011.persistence.Persistence;
+import java.math.BigDecimal;
+import org.bson.types.ObjectId;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Testing our entities and the MongodbGenericPersistence.
@@ -61,7 +59,7 @@ public class GenericPersistenceTest {
 		assertEquals("The return value and actual value of the ObjectId should match",
 				company.getId(), id1);
 		WorkerEntity worker = new WorkerEntity("firstname", "surname", null, null, null,
-				"foo@bar.com", new BigDecimal("5.25"), 5);
+				"foo@bar.com", new BigDecimal("5.25"), 5, null);
 		ObjectId id2 = genericPersistence.persist(worker);
 		assertEquals("The return value and actual value of the ObjectId should match",
 				worker.getId(), id2);
