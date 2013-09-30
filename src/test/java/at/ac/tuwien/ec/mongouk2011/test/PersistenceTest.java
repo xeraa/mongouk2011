@@ -220,6 +220,20 @@ public class PersistenceTest {
 	}
 
 	/**
+	 * Test if getAllManagers() only returns managers.
+	 */
+	@Test
+	public void getAllManagers(){
+		WorkerEntity worker = new WorkerEntity();
+		worker.setEmail("worker@test.com");
+		persistence.persistWorkerEntity(worker);
+		ManagerEntity manager = new ManagerEntity();
+		manager.setEmail("manager@test.com");
+		persistence.persistManagerEntity(manager);
+		assertEquals(1, persistence.getAllManagers().size());
+	}
+
+	/**
 	 * Check the uniqueness constraint.
 	 */
 	@Test

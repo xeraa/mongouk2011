@@ -65,12 +65,16 @@ public class MongodbPersistence implements Persistence {
 
 	@Override
 	public List<ManagerEntity> getAllManagers() {
-		return mongoDatastore.createQuery(ManagerEntity.class).asList();
+		return mongoDatastore.createQuery(ManagerEntity.class)
+				.disableValidation().field("className") // Querying an implicit attribute you to disable validation
+				.equal(ManagerEntity.class.getName()).asList();
 	}
 
 	@Override
 	public List<WorkerEntity> getAllWorkers() {
-		return mongoDatastore.createQuery(WorkerEntity.class).asList();
+		return mongoDatastore.createQuery(WorkerEntity.class)
+				.disableValidation().field("className") // Querying an implicit attribute you to disable validation
+				.equal(WorkerEntity.class.getName()).asList();
 	}
 
 	@Override
