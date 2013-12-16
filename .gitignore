@@ -6,6 +6,7 @@
 
 /bin
 /target
+/.idea
 /.settings
 
 mongouk2011.pez
