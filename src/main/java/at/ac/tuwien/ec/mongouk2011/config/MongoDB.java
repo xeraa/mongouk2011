@@ -21,7 +21,7 @@ public class MongoDB {
 
 	private MongoDB() {
 		try {
-			MongoClient mongoClient = new MongoClient("127.0.0.1", 27017);
+			MongoClient mongoClient = new MongoClient("127.0.0.1", 8082);
 			mongoClient.setWriteConcern(WriteConcern.SAFE);
 			datastore = new Morphia().mapPackage(BaseEntity.class.getPackage().getName())
 					.createDatastore(mongoClient, DB_NAME);
@@ -36,6 +36,8 @@ public class MongoDB {
 		return INSTANCE;
 	}
 
+	// Creating the mongo connection is expensive - (re)use a singleton for performance reasons
+	// Both the underlying Java driver and Datastore are thread safe
 	public Datastore getDatabase() {
 		return datastore;
 	}
