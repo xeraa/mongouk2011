@@ -27,9 +27,9 @@ public class EmployeeEntity extends BaseEntity {
 	@Indexed(unique = true)
 	private String email;
 
-	private List<String> telephone = new ArrayList<String>();
-	private List<String> fax = new ArrayList<String>();
-	private List<String> mobile = new ArrayList<String>();
+	private List<String> telephone = new ArrayList<>();
+	private List<String> fax = new ArrayList<>();
+	private List<String> mobile = new ArrayList<>();
 
 	/**
 	 * You shouldn't use Double for money values, but BigDecimal instead.

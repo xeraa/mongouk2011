@@ -19,14 +19,14 @@ public class CompanyEntity extends BaseEntity {
 	@Indexed(unique = true)
 	private String name;
 
-	private List<String> telephone = new ArrayList<String>();
-	private List<String> fax = new ArrayList<String>();
-	private List<String> mobile = new ArrayList<String>();
+	private List<String> telephone = new ArrayList<>();
+	private List<String> fax = new ArrayList<>();
+	private List<String> mobile = new ArrayList<>();
 	private String email;
 	private String web;
 
 	@Reference
-	private List<EmployeeEntity> employees = new ArrayList<EmployeeEntity>();
+	private List<EmployeeEntity> employees = new ArrayList<>();
 
 	@Embedded
 	private BankConnectionEntity bankConnection;

@@ -89,7 +89,7 @@ public class MongodbPersistence implements Persistence {
 	@Override
 	public List<CompanyEntity> findCompanyByCountry(final String country) {
 		if ((country == null) || country.isEmpty()) {
-			return new ArrayList<CompanyEntity>();
+			return new ArrayList<>();
 		}
 		return mongoDatastore.createQuery(CompanyEntity.class).filter("address.country =", country)
 				.asList();
@@ -104,7 +104,7 @@ public class MongodbPersistence implements Persistence {
 		 */
 		if (((minimum != null) && (minimum.compareTo(BigDecimal.ZERO) < 0))
 				|| ((minimum != null) && (maximum != null) && (maximum.compareTo(minimum) < 0))) {
-			return new ArrayList<EmployeeEntity>();
+			return new ArrayList<>();
 		}
 		Query<EmployeeEntity> query = mongoDatastore.find(EmployeeEntity.class);
 		if (minimum != null) {
@@ -123,7 +123,7 @@ public class MongodbPersistence implements Persistence {
 			final BigDecimal maximum) {
 		if (((minimum != null) && (minimum.compareTo(BigDecimal.ZERO) < 0))
 				|| ((minimum != null) && (maximum != null) && (maximum.compareTo(minimum) < 0))) {
-			return new ArrayList<EmployeeEntity>();
+			return new ArrayList<>();
 		}
 		Query<EmployeeEntity> query = mongoDatastore.find(EmployeeEntity.class);
 		if (minimum != null) {
@@ -140,7 +140,7 @@ public class MongodbPersistence implements Persistence {
 	@Override
 	public List<EmployeeEntity> findCompanyEmployees(final String companyName) {
 		if ((companyName == null) || companyName.isEmpty()) {
-			return new ArrayList<EmployeeEntity>();
+			return new ArrayList<>();
 		}
 		CompanyEntity company = mongoDatastore.find(CompanyEntity.class).field("name")
 				.equal(companyName).get();
