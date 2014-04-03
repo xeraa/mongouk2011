@@ -171,9 +171,7 @@ public class EmployeeEntity extends BaseEntity {
 
 		EmployeeEntity that = (EmployeeEntity) o;
 
-		if(email != null ? !email.equals(that.email) : that.email != null) return false;
-
-		return true;
+		return !(email != null ? !email.equals(that.email) : that.email != null);
 	}
 
 	@Override
