@@ -22,7 +22,7 @@ import org.mongodb.morphia.query.Query;
  */
 public class MongodbPersistence implements Persistence {
 
-	private Datastore mongoDatastore;
+	private final Datastore mongoDatastore;
 
 	public MongodbPersistence() {
 		mongoDatastore = MongoDB.instance().getDatabase();

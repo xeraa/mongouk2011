@@ -13,7 +13,7 @@ import org.mongodb.morphia.Datastore;
  */
 public class MongodbGenericPersistence implements GenericPersistence {
 
-	private Datastore mongoDatastore;
+	private final Datastore mongoDatastore;
 
 	public MongodbGenericPersistence() {
 		mongoDatastore = MongoDB.instance().getDatabase();
