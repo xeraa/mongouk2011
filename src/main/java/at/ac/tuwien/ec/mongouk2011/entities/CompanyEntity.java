@@ -9,9 +9,7 @@ import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Reference;
 
 /**
- * The CompanyEntity, using @Indexed(unique=true), @Reference (list), and
- * 
- * @Embedded.
+ * The CompanyEntity, using @Indexed(unique=true), @Reference (list), and @Embedded.
  */
 @Entity(value = "company", noClassnameStored = true)
 public class CompanyEntity extends BaseEntity {

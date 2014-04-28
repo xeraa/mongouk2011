@@ -11,7 +11,7 @@ import org.mongodb.morphia.annotations.Version;
 /**
  * Provide the BaseEntity implementation for all entities:
  * 
- * @Id, creation and last change date, version, their getters and setters
+ * ID, creation and last change date, version, their getters and setters
  *      (including @PrePersist), and some abstract methods we'll require in the
  *      specific entities.
  */
@@ -21,9 +21,7 @@ public abstract class BaseEntity {
 	protected ObjectId id;
 
 	/**
-	 * We'll only provide getters for these attributes, setting is done in
-	 * 
-	 * @PrePersist.
+	 * We'll only provide getters for these attributes, setting is done in @PrePersist.
 	 */
 	protected Date creationDate;
 	protected Date lastChange;
