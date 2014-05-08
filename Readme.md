@@ -28,7 +28,7 @@ Inside the base folder (where the pom.xml file is located) run the following com
 
 
 ## License
-    Copyright (c) 2011 - 2013, Philipp Krenn
+    Copyright (c) 2011 - 2014, Philipp Krenn
     All rights reserved.
    
     Redistribution and use in source and binary forms, with or without
