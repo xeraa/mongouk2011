@@ -3,3 +3,5 @@ jdk:
   - openjdk7
   - oraclejdk7
 services: mongodb
+after_success:
+  - mvn clean cobertura:cobertura coveralls:cobertura
