@@ -24,7 +24,6 @@ An IDE like Eclipse or IntelliJ is highly recommended but not required.
 ## Getting started
 Inside the base folder (where the pom.xml file is located) run the following commands to get started - this assumes that you have MongoDB running on the default port:
 
-    mvn install
     mvn test
 
 
