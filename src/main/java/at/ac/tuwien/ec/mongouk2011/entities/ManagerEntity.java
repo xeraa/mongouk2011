@@ -1,8 +1,9 @@
 package at.ac.tuwien.ec.mongouk2011.entities;
 
+import org.mongodb.morphia.annotations.Serialized;
+
 import java.math.BigDecimal;
 import java.util.List;
-import org.mongodb.morphia.annotations.Serialized;
 
 /**
  * A concrete EmployeeEntity, showing the difference between object and
@@ -55,6 +56,17 @@ public class ManagerEntity extends EmployeeEntity {
 
 	public boolean isApproveHires() {
 		return approveHires;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		// Doing the same thing as the base method, just for added clarity
+		return super.equals(o);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 
 }

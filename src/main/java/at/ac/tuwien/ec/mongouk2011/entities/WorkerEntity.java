@@ -1,9 +1,11 @@
 package at.ac.tuwien.ec.mongouk2011.entities;
 
-import at.ac.tuwien.ec.mongouk2011.persistence.BigDecimalConverter;
+import org.mongodb.morphia.annotations.Converters;
+
 import java.math.BigDecimal;
 import java.util.List;
-import org.mongodb.morphia.annotations.Converters;
+
+import at.ac.tuwien.ec.mongouk2011.persistence.BigDecimalConverter;
 
 /**
  * A concrete EmployeeEntity.
@@ -41,6 +43,17 @@ public class WorkerEntity extends EmployeeEntity {
 		if(dailyAllowance != null){
 			this.dailyAllowance = dailyAllowance.setScale(2, BigDecimal.ROUND_HALF_UP);
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		// Doing the same thing as the base method, just for added clarity
+		return super.equals(o);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 
 }
