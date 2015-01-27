@@ -1,5 +1,7 @@
 # MongoUK2011 Morphia Presentation
 
+## This is an old project, go to [https://github.com/xeraa/morphia-demo](https://github.com/xeraa/morphia-demo) for an updated version
+
 [![Build Status](https://travis-ci.org/xeraa/mongouk2011.png?branch=master)](https://travis-ci.org/xeraa/mongouk2011)
 [![Coverage Status](https://img.shields.io/coveralls/xeraa/mongouk2011.svg)](https://coveralls.io/r/xeraa/mongouk2011)
 
